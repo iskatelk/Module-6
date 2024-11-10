@@ -1,0 +1,59 @@
+<?php
+
+$textStorage = [];
+
+function addText(string $title, string $text, &$textStorage)
+{
+    $index = count($textStorage);
+    $textStorage[$index]['title'] = $title;
+    $textStorage[$index]['text'] = $text;
+}
+
+addText('Приветствие', 'Привет, Мир!', $textStorage);
+
+addText('Приветствие2', 'Привет, Мир2!', $textStorage);
+
+var_dump($textStorage);
+
+function removeText(int $numberText, array &$textStorage): bool
+{
+    if ($textStorage[$numberText]['text'] != '') {
+        unset($textStorage[$numberText]);
+        echo "Удален текст {$numberText}" . PHP_EOL;
+
+        return true;
+    } else if (array_key_exists($numberText, $textStorage) == false) {
+
+        echo "Текста {$numberText} нет" . PHP_EOL;
+        return false;
+    }
+}
+
+//var_dump(removeText(0, $textStorage));
+
+removeText(5, $textStorage);
+
+//var_dump($textStorage);
+
+function editText(int $numberText, string $title, string $text, array &$textStorage): bool
+{
+    if ($textStorage[$numberText] != '') {
+        $replacements1 = [
+            $numberText => [
+                'title' => $title,
+                'text' => $text
+            ]
+        ];
+        // die($replacements2. '     '.$replacements2[1]['title']);
+        $textStorage = array_replace($textStorage, $replacements1);
+        // die($textStorage. '    '.$textStorage[1]['title']);
+        echo "Запись {$numberText} изменена" . PHP_EOL;
+        return true;
+    }
+    echo "Записи {$numberText} нет" . PHP_EOL;
+    return false;
+}
+
+editText(1, 'Privet2', 'Привет, Мир2!', $textStorage);
+
+//var_dump($textStorage);
