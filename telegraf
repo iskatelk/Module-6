@@ -17,19 +17,20 @@ var_dump($textStorage);
 
 function removeText(int $numberText, array &$textStorage): bool
 {
-    if ($textStorage[$numberText]['text'] != '') {
+    if (!array_key_exists($numberText, $textStorage)) {
+
+        echo "Сообщение № {$numberText} не найдено" . PHP_EOL;
+        return false;
+    } else {
         unset($textStorage[$numberText]);
-        echo "Удален текст {$numberText}" . PHP_EOL;
+        echo "Удалено сообщение № {$numberText}" . PHP_EOL;
 
         return true;
-    } else if (array_key_exists($numberText, $textStorage) == false) {
 
-        echo "Текста {$numberText} нет" . PHP_EOL;
-        return false;
     }
 }
 
-//var_dump(removeText(0, $textStorage));
+var_dump(removeText(0, $textStorage));
 
 removeText(5, $textStorage);
 
@@ -37,7 +38,7 @@ removeText(5, $textStorage);
 
 function editText(int $numberText, string $title, string $text, array &$textStorage): bool
 {
-    if ($textStorage[$numberText] != '') {
+    if ($textStorage[$numberText] !== '') {
         $replacements1 = [
             $numberText => [
                 'title' => $title,
