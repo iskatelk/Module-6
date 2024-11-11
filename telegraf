@@ -9,11 +9,6 @@ function addText(string $title, string $text, &$textStorage)
     $textStorage[$index]['text'] = $text;
 }
 
-addText('Приветствие', 'Привет, Мир!', $textStorage);
-
-addText('Приветствие2', 'Привет, Мир2!', $textStorage);
-
-var_dump($textStorage);
 
 function removeText(int $numberText, array &$textStorage): bool
 {
@@ -29,12 +24,6 @@ function removeText(int $numberText, array &$textStorage): bool
 
     }
 }
-
-var_dump(removeText(0, $textStorage));
-
-removeText(5, $textStorage);
-
-//var_dump($textStorage);
 
 function editText(int $numberText, string $title, string $text, array &$textStorage): bool
 {
@@ -54,6 +43,19 @@ function editText(int $numberText, string $title, string $text, array &$textStor
     echo "Записи {$numberText} нет" . PHP_EOL;
     return false;
 }
+
+
+addText('Приветствие', 'Привет, Мир!', $textStorage);
+
+addText('Приветствие2', 'Привет, Мир2!', $textStorage);
+
+var_dump($textStorage);
+
+var_dump(removeText(0, $textStorage));
+
+removeText(5, $textStorage);
+
+//var_dump($textStorage);
 
 editText(1, 'Privet2', 'Привет, Мир2!', $textStorage);
 
