@@ -27,7 +27,7 @@ function removeText(int $numberText, array &$textStorage): bool
 
 function editText(int $numberText, string $title, string $text, array &$textStorage): bool
 {
-    if ($textStorage[$numberText] !== '') {
+    if (array_key_exists($numberText, $textStorage)) {
         $replacements1 = [
             $numberText => [
                 'title' => $title,
@@ -37,11 +37,12 @@ function editText(int $numberText, string $title, string $text, array &$textStor
         // die($replacements2. '     '.$replacements2[1]['title']);
         $textStorage = array_replace($textStorage, $replacements1);
         // die($textStorage. '    '.$textStorage[1]['title']);
-        echo "Запись {$numberText} изменена" . PHP_EOL;
+        echo "Сообщение № {$numberText} изменено" . PHP_EOL;
         return true;
+    } else {
+        echo "Сообщения № {$numberText} нет" . PHP_EOL;
+        return false;
     }
-    echo "Записи {$numberText} нет" . PHP_EOL;
-    return false;
 }
 
 
@@ -59,4 +60,4 @@ removeText(5, $textStorage);
 
 editText(1, 'Privet2', 'Привет, Мир2!', $textStorage);
 
-//var_dump($textStorage);
+var_dump($textStorage);
